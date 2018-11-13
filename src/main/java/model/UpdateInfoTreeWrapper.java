@@ -16,7 +16,7 @@ public class UpdateInfoTreeWrapper {
      * childList 는 root 의 자식 리스트를 필요로 한다.
      * prefixSize 는 local 경로의 길이를 필요로 한다.
      *
-     * @param prefixSize int 형태의 local 경로에 대한 길이
+     * @param prefixSize int 형태의 local 경로에 대한 길이로 공통되지 않는 경로 부분을 자르기 위해서 사용 한다.
      * @param local String 형태의 local 경로로 서버 에서는 업데이트 대상 파일들의 경로
      *              클라이언트 에서는 업데이트 될 파일들이 저장 될 경로
      * @param childList ArrayList 형태의 UpdateInfoTree root 의 자식 리스트
@@ -62,4 +62,22 @@ public class UpdateInfoTreeWrapper {
 
     }
 
+    public static void printAll(ArrayList<UpdateInfo> childList) {
+
+        if(childList.isEmpty()) {
+            return;
+        }
+
+        for(UpdateInfo n : childList) {
+            System.out.println(n.getFilePath());
+            System.out.println(n.getFilePath());
+            System.out.println(n.getFileName());
+            System.out.println("dir : " + n.isDirectory());
+            if(!n.isDirectory()) {
+                System.out.println(n.getFileHash());
+            }
+            System.out.println("\n\n");
+            printAll(n.getChildList());
+        }
+    }
 }
