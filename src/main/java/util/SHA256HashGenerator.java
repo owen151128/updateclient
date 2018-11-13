@@ -41,15 +41,15 @@ public class SHA256HashGenerator {
 
         } catch (NoSuchAlgorithmException e) {
 
-            System.out.println(ERR_MSG_NOT_FOUND_ALGORITHM);
             e.printStackTrace();
+            System.out.println(ERR_MSG_NOT_FOUND_ALGORITHM);
 
             return "";
 
         } catch (IOException e) {
 
-            System.out.println(ERR_MSG_NO_SEARCH_FILE);
             e.printStackTrace();
+            System.out.println(ERR_MSG_NO_SEARCH_FILE);
 
             return "";
         }
