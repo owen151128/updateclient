@@ -10,9 +10,10 @@ import java.security.NoSuchAlgorithmException;
  * SHA256 해시 알고리즘을 사용하여 해시값을 만들어주는 클래스
  */
 public class SHA256HashGenerator {
-    private static final String SHA_256 = "SHA-256";
-    private static final String NO_SEARCH_ALGORITHM = "SHA-256 알고리즘을 찾을수 없습니다.";
-    private static final String NO_SEARCH_FILE = "파일을 찾는데 실패하였습니다.";
+    private static final String SHA_256_ALGORITHM = "SHA-256";
+
+    private static final String ERR_MSG_NOT_FOUND_ALGORITHM = "SHA-256 Algorithm not supported";
+    private static final String ERR_MSG_NO_SEARCH_FILE = "File not found. check file path";
 
     /**
      * filePath 에 있는 파일에 대한 SHA256 해시를 반환하는 메소드
@@ -27,7 +28,7 @@ public class SHA256HashGenerator {
 
         try {
 
-            sha = MessageDigest.getInstance(SHA_256);
+            sha = MessageDigest.getInstance(SHA_256_ALGORITHM);
             sha.update(Files.readAllBytes(new File(filePath).toPath()));
 
             data = sha.digest();
@@ -40,13 +41,14 @@ public class SHA256HashGenerator {
 
         } catch (NoSuchAlgorithmException e) {
 
-            System.out.println(NO_SEARCH_ALGORITHM);
+            System.out.println(ERR_MSG_NOT_FOUND_ALGORITHM);
             e.printStackTrace();
 
             return "";
 
         } catch (IOException e) {
-            System.out.println(NO_SEARCH_FILE);
+
+            System.out.println(ERR_MSG_NO_SEARCH_FILE);
             e.printStackTrace();
 
             return "";
