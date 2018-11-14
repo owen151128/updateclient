@@ -24,6 +24,7 @@ public class ServerConnector {
     private static final String MSG_SEND_UPDATE_TREE_REQUEST = "send UpdateInfoTree download request";
     private static final String MSG_DOWNLOAD_UPDATE_TREE = "download UpdateInfoTree...";
     private static final String MSG_UPDATE_TREE_DOWNLOADED = "download UpdateInfoTree complete";
+    private static final String MSG_DISCONNECTED_SERVER = "Disconnected from update server";
 
     private static final String ERR_SERVER_NOT_FOUND = "server not found. check IP or Network state";
     private static final String ERR_UPDATE_INFO_TREE_CLASS_NOT_FOUND = "UpdateInfoTree class not found. check Java class";
@@ -39,7 +40,8 @@ public class ServerConnector {
     /**
      * Single-tone 패턴을 위해서 생성자는 외부에서 호출하지 못하게 한다.
      */
-    private ServerConnector() {}
+    private ServerConnector() {
+    }
 
     /**
      * Singloe-tone 패턴으로 구현, Instance 를 얻는 메소드
@@ -123,6 +125,8 @@ public class ServerConnector {
                 if (ois != null) {
                     ois.close();
                 }
+
+                System.out.println(MSG_DISCONNECTED_SERVER);
 
             } catch (IOException e) {
 
