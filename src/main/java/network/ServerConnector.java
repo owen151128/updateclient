@@ -46,7 +46,7 @@ public class ServerConnector {
      *
      * @return ServerConnectUtil 의 Instance
      */
-    public static ServerConnector getInstance() {
+    public static synchronized ServerConnector getInstance() {
 
         if (instance == null) {
             instance = new ServerConnector();
