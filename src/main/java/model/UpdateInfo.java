@@ -24,6 +24,7 @@ public class UpdateInfo implements Serializable {
 
     /**
      * 해당 파일의 경로를 반환하는 메소드
+     *
      * @return String 형태의 해당 파일 경로
      */
     public String getFilePath() {
@@ -32,6 +33,7 @@ public class UpdateInfo implements Serializable {
 
     /**
      * 해당 파일의 경로를 설정하는 메소드
+     *
      * @param filePath String 형태의 해당 파일 경로
      */
     public void setFilePath(String filePath) {
@@ -40,6 +42,7 @@ public class UpdateInfo implements Serializable {
 
     /**
      * 해당 파일의 파일명을 반환하는 메소드
+     *
      * @return String 형태의 해당 파일명
      */
     public String getFileName() {
@@ -48,6 +51,7 @@ public class UpdateInfo implements Serializable {
 
     /**
      * 해당 파일의 파일명을 설정하는 메소드
+     *
      * @param fileName String 형태의 해당 파일명
      */
     public void setFileName(String fileName) {
@@ -56,6 +60,7 @@ public class UpdateInfo implements Serializable {
 
     /**
      * 해당 파일의 Hash 값을 반환하는 메소드
+     *
      * @return String 형태의 해당 Hash 값
      */
     public String getFileHash() {
@@ -64,6 +69,7 @@ public class UpdateInfo implements Serializable {
 
     /**
      * 해당 파일의 Hash 값을 설정하는 메소드
+     *
      * @param fileHash String 형태의 해당 Hash 값
      */
     public void setFileHash(String fileHash) {
@@ -72,6 +78,7 @@ public class UpdateInfo implements Serializable {
 
     /**
      * 해당 클래스가 담고있는 정보에 대해 디렉토리 여부를 반환하는 메소드
+     *
      * @return boolean 형태의 값 디렉토리 일 경우 true, 파일 일 경우 false
      */
     public boolean isDirectory() {
@@ -80,6 +87,7 @@ public class UpdateInfo implements Serializable {
 
     /**
      * 해당 클래스가 담고있는 정보에 대해 디렉토리 여부를 설정하는 메소드
+     *
      * @param directory 디렉토리 일 경우 true 를 설정 하고, 아닐 경우 false 를 설정 한다.
      */
     public void setDirectory(boolean directory) {
@@ -88,6 +96,7 @@ public class UpdateInfo implements Serializable {
 
     /**
      * 해당 클래스의 자식 리스트를 얻는 메소드
+     *
      * @return ArrayList 형태의 자식 리스트
      */
     public ArrayList<UpdateInfo> getChildList() {

@@ -1,5 +1,8 @@
 package model;
 
+import util.SHA256HashGenerator;
+
+import java.io.File;
 import java.io.Serializable;
 import java.util.ArrayList;
 
@@ -12,38 +15,78 @@ import java.util.ArrayList;
  */
 public class UpdateInfoTree implements Serializable {
     private static final long serialVersionUID = 1L;
-    private String clientPath;
-    private ArrayList<UpdateInfo> childList;
+    private UpdateInfo root;
 
     /**
-     * 기본 생성자로써 자식 리스트를 초기화 한다.
+     * 기본 생성자로써 root 노드를 설정한다.
      */
-    public UpdateInfoTree() {
-        childList = new ArrayList<>();
+    public UpdateInfoTree(String local_path) {
+        File rootFile = new File(local_path);
+        root = new UpdateInfo();
+
+        root.setDirectory(true);
+        root.setFileName(rootFile.getName());
+        root.setFilePath(rootFile.getAbsolutePath());
     }
 
     /**
-     * 클라이언트의 저장될 경로를 설정하는 메소드
-     * @param clientPath String 형태의 클라이언트 저장 경로
+     * root 노드를 반환하는 메소드
+     *
+     * @return UpdateInfo 형태의 root 노드
      */
-    public void setClientPath(String clientPath) {
-        this.clientPath = clientPath;
+    public UpdateInfo getRoot() {
+        return root;
     }
 
     /**
-     * 클라이언트의 저장될 경로를 반환하는 메소드
-     * @return String 형태의 클라이언트의 저장될 경로
+     * UpdateInfoTree 를 생성하는 메소드
+     * 메소드 실행시 local 경로 안을 순회 하며 UpdateInfoTree 를 만든다.
+     * childList 는 root 의 자식 리스트를 필요로 한다.
+     * prefixSize 는 local 경로의 길이를 필요로 한다.
+     *
+     * @param prefixSize int 형태의 local 경로에 대한 길이로 공통되지 않는 경로 부분을 자르기 위해서 사용 한다.
+     * @param local      String 형태의 local 경로로 서버 에서는 업데이트 대상 파일들의 경로
+     *                   클라이언트 에서는 업데이트 될 파일들이 저장 될 경로
+     * @param childList  ArrayList 형태의 UpdateInfoTree root 의 자식 리스트
      */
-    public String getClientPath() {
-        return clientPath;
-    }
+    public static void createUpdateInfoTree(int prefixSize, String local, ArrayList<UpdateInfo> childList) {
 
-    /**
-     * 자식 리스트를 반환하는 메소드
-     * @return ArrayList 형태의 자식 리스트
-     */
-    public ArrayList<UpdateInfo> getChildList() {
-        return childList;
-    }
+        File target = new File(local);
+        File list[] = target.listFiles();
 
+        UpdateInfo newNode;
+
+        if (list != null) {
+            for (File f : list) {
+
+                if (f.getName().substring(0, 1).equals(".")) {
+                    continue;
+                }
+
+                if (f.isDirectory()) {
+
+                    newNode = new UpdateInfo();
+
+                    newNode.setFilePath(f.getAbsolutePath().substring(prefixSize));
+                    newNode.setFileName(f.getName());
+                    newNode.setDirectory(true);
+
+                    childList.add(newNode);
+
+                    createUpdateInfoTree(prefixSize, f.getAbsolutePath(), newNode.getChildList());
+                } else {
+
+                    newNode = new UpdateInfo();
+
+                    newNode.setFilePath(f.getAbsolutePath().substring(prefixSize));
+                    newNode.setFileName(f.getName());
+                    newNode.setDirectory(false);
+                    newNode.setFileHash(SHA256HashGenerator.getHash(f.getAbsoluteFile().toString()));
+
+                    childList.add(newNode);
+                }
+            }
+        }
+
+    }
 }
