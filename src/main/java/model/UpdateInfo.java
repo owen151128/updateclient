@@ -102,4 +102,37 @@ public class UpdateInfo implements Serializable {
     public ArrayList<UpdateInfo> getChildList() {
         return childList;
     }
+
+    /**
+     * UpdateInfo 의 동등성 을 확인하는 메소드 이다.
+     * 파일 이름, 경로 ,해쉬값, 디렉토리 여부 를 비교해서 모두 같으면 true, 하나라도 다르면 false 를 반환 한다.
+     *
+     * @param obj UpdateInfo 형태의 비교할 UpdateInfo
+     * @return 파일 이름, 경로 ,해쉬값, 디렉토리 여부 를 비교해서 모두 같으면 true, 하나라도 다르면 false 를 반환
+     */
+    @Override
+    public boolean equals(Object obj) {
+
+        if (obj instanceof UpdateInfo) {
+
+            UpdateInfo o = (UpdateInfo) obj;
+
+            if (this.getFileHash() == null || o.getFileHash() == null) {
+
+                return this.getFileName().equals(o.getFileName())
+                        && this.isDirectory == o.isDirectory
+                        && this.getFilePath().equals(o.getFilePath());
+
+            }
+
+            return this.getFileHash().equals(o.getFileHash())
+                    && this.getFilePath().equals(o.getFilePath())
+                    && this.isDirectory == o.isDirectory
+                    && this.getFileName().equals(o.getFileName());
+
+        } else {
+
+            return false;
+        }
+    }
 }
