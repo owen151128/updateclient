@@ -9,8 +9,7 @@ package main;
  */
 public class MainConstants {
 
-    static final int PORT_NUMBER = 8080;
-    static final int TIME_OUT = 10;
+    static final String ERR_ARGUMENT_COUNT_MISSMATCH = "update Client is required serverIP, port, timeout!";
+    static final String ERR_WRONG_ARGUMENTS = "wrong argument please check argument!";
 
-    static final String ERR_NO_SERVER_IP = "update Client is required Server IP!";
 }

@@ -83,8 +83,8 @@ public class ServerConnector {
             SocketAddress target = new InetSocketAddress(serverIP, port);
 
             socket = new Socket();
-            socket.setSoTimeout(timeout * 1000);
-            socket.connect(target, timeout * 1000);
+            socket.setSoTimeout(timeout);
+            socket.connect(target, timeout);
 
             osw = new OutputStreamWriter(socket.getOutputStream());
             bw = new BufferedWriter(osw);
@@ -196,8 +196,8 @@ public class ServerConnector {
             SocketAddress target = new InetSocketAddress(serverIP, port);
 
             socket = new Socket();
-            socket.setSoTimeout(timeout * 1000);
-            socket.connect(target, timeout * 1000);
+            socket.setSoTimeout(timeout);
+            socket.connect(target, timeout);
 
             osw = new OutputStreamWriter(socket.getOutputStream());
             bw = new BufferedWriter(osw);

@@ -23,23 +23,34 @@ public class Main {
      */
     public static void main(String[] args) {
 
-        String serverIP;
+        String serverIP = "";
+        int port = 0;
+        int timeout = 0;
 
-        if (args.length == 0) {
+        if (args.length < 3) {
 
-            System.out.println(MainConstants.ERR_NO_SERVER_IP);
+            System.out.println(MainConstants.ERR_ARGUMENT_COUNT_MISSMATCH);
 
             return;
 
         } else {
 
-            serverIP = args[0];
+            try {
+
+                serverIP = args[0];
+                port = Integer.parseInt(args[1]);
+                timeout = Integer.parseInt(args[2]);
+
+            }catch (NumberFormatException e) {
+
+                System.out.println(MainConstants.ERR_WRONG_ARGUMENTS);
+            }
 
         }
 
         UpdateModule module = UpdateModule.getInstance();
 
-        ArrayList<ArrayList<UpdateInfo>> result = module.checkUpdate(serverIP, MainConstants.PORT_NUMBER, MainConstants.TIME_OUT);
+        ArrayList<ArrayList<UpdateInfo>> result = module.checkUpdate(serverIP, port, timeout);
 
         module.deleteFiles(result.get(0));
 
@@ -47,7 +58,7 @@ public class Main {
 
         if (!downloadList.isEmpty()) {
 
-            module.updateFiles(serverIP, MainConstants.PORT_NUMBER, MainConstants.TIME_OUT, result.get(1));
+            module.updateFiles(serverIP, port, timeout, result.get(1));
 
         }
 
