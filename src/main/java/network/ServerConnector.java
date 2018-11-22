@@ -70,7 +70,8 @@ public class ServerConnector {
      *
      * @param serverIP String 형태의 서버 IP
      * @param port     int 형태의 서버 port 번호
-     * @return Update Info DTO 형태의 서버 에서 받아온 업데이트 정보
+     * @param timeout  통신에 대한 timeout
+     * @return UpdateInfoDTO 형태의 서버 에서 받아온 업데이트 정보
      */
     public UpdateInfoDTO getUpdateInfoDTO(String serverIP, int port, int timeout) {
 
