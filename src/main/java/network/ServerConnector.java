@@ -1,11 +1,12 @@
 package network;
 
 import model.DownloadRequestDTO;
-import model.FileResponseDTO;
+import model.FileResponse;
 import model.UpdateInfoDTO;
 
 import java.io.*;
 import java.net.*;
+import java.util.ArrayList;
 
 /**
  * 서버와 통신을 담당하는 클래스
@@ -181,8 +182,7 @@ public class ServerConnector {
 
     /**
      * DownloadRequestDTO 를 서버에 보낸 후
-     * 서버에서 FileResponseDTO 를 다운로드 받는 메소드
-     * FileResponseDTO 는 FileResponse List 를 가지고 있다.
+     * 서버에서 FileResponse 들을 다운로드 받는 메소드
      * FileResponse 에는 파일 이름, 경로, 해쉬값, 디렉토리 여부, 파일에 대한 바이너리 byte[] 가 있다.
      *
      * @param serverIP String 형태로 서버의 아이피를 받는다.
@@ -191,9 +191,9 @@ public class ServerConnector {
      * @param dto      DownloadRequestDTO 형태로 서버에 보낼 DownloadRequestDTO 를 받는다.
      * @return FileResponseDTO 형태로 서버에서 받은 FileResponseDTO 를 반환 한다.
      */
-    public FileResponseDTO sendDownloadRequestDTOAndGetFileResponseDTO(String serverIP, int port, int timeout, DownloadRequestDTO dto) {
+    public ArrayList<FileResponse> sendDownloadRequestDTOAndGetFileResponses(String serverIP, int port, int timeout, DownloadRequestDTO dto) {
 
-        FileResponseDTO result = null;
+        ArrayList<FileResponse> result = new ArrayList<>();
 
         try {
 
@@ -222,9 +222,19 @@ public class ServerConnector {
 
             oos.writeObject(dto);
 
-            result = (FileResponseDTO) ois.readObject();
+            try {
 
-            System.out.println(MSG_FILE_RESPONSE_DOWNLOADED);
+                while (true) {
+
+                    result.add((FileResponse) ois.readObject());
+
+                }
+
+            } catch (EOFException e) {
+
+                System.out.println(MSG_FILE_RESPONSE_DOWNLOADED);
+
+            }
 
         } catch (UnknownHostException e) {
 

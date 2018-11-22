@@ -112,12 +112,12 @@ public class UpdateModule {
 
         downloadRequestDTO.setList(updateInfos);
 
-        FileResponseDTO responseDTO = serverConnector.sendDownloadRequestDTOAndGetFileResponseDTO(serverIP,
+        ArrayList<FileResponse> responses = serverConnector.sendDownloadRequestDTOAndGetFileResponses(serverIP,
                 portNumber,
                 timeout,
                 downloadRequestDTO);
 
-        if (responseDTO == null) {
+        if (responses == null) {
 
             System.out.println(ERR_RESPONSE_DTO_FAILED);
 
@@ -126,7 +126,7 @@ public class UpdateModule {
 
         ArrayList<UpdateInfo> result = new ArrayList<>();
 
-        for (FileResponse r : responseDTO.getList()) {
+        for (FileResponse r : responses) {
 
             String target = new File(local_prefix_path + File.separator + r.getFilePath()).getAbsolutePath();
 
