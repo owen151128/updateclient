@@ -94,8 +94,8 @@ public class UpdateInfoTree {
      *
      * @param client           클라이언트의 UpdateInfoTree Root
      * @param server           서버의 UpdateInfoTree Root
-     * @param downloadRequests ArrayList<UpdateInfo> 형태의 다운로드 요청이 담길 리스트
-     * @param deleteList       ArrayList<UpdateInfo> 형태의 삭제 할 파일이 담길 리스트
+     * @param downloadRequests ArrayList 형태의 다운로드 요청이 담길 리스트
+     * @param deleteList       ArrayList 형태의 삭제 할 파일이 담길 리스트
      */
     public static void compareHash(UpdateInfo client, UpdateInfo server,
                                    ArrayList<UpdateInfo> downloadRequests,

@@ -13,9 +13,9 @@ public class DownloadRequestDTO implements Serializable {
     private ArrayList<UpdateInfo> list;
 
     /**
-     * ArrayList<UpdateInfo> 를 반환 하는 메소드 이다. 서버에 요청할 파일들의 정보가 담겨저 있는 리스트 가 반환 된다.
+     * ArrayList 를 반환 하는 메소드 이다. UpdateInfo 형태의 서버에 요청할 파일들의 정보가 담겨저 있는 리스트 가 반환 된다.
      *
-     * @return ArrayList<UpdateInfo> 형태의 서버에 요청할 파일들의 정보가 담겨저 있는 리스트
+     * @return ArrayList 형태의 서버에 요청할 파일들의 정보가 담겨저 있는 리스트
      */
     public ArrayList<UpdateInfo> getList() {
 
@@ -25,7 +25,7 @@ public class DownloadRequestDTO implements Serializable {
     /**
      * 서버에 요청할 파일들의 정보가 담겨저 있는 리스트 를 설정하는 메소드
      *
-     * @param list ArrayList<UpdateInfo> 형태의 리스트
+     * @param list ArrayList 형태의 리스트
      */
     public void setList(ArrayList<UpdateInfo> list) {
 
