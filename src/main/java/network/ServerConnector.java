@@ -34,6 +34,7 @@ public class ServerConnector {
     private static final String ERR_CONNECTION_TIME_OUT = "server connection time out. check Network state";
     private static final String ERR_IO_FAILED = "I/O failed. check stack trace";
     private static final String ERR_STREAM_CLOSED_FAILED = "Stream close Failed! check stack trace";
+    private static final String ERR_SERVER_IS_BUSY = "server is busy now";
 
     private static ServerConnector instance;
     private Socket socket;
@@ -108,6 +109,10 @@ public class ServerConnector {
         } catch (UnknownHostException e) {
 
             System.out.println(ERR_SERVER_NOT_FOUND);
+
+        } catch (ClassCastException e) {
+
+            System.out.println(ERR_SERVER_IS_BUSY);
 
         } catch (ClassNotFoundException e) {
 

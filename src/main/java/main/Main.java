@@ -52,6 +52,12 @@ public class Main {
 
         ArrayList<ArrayList<UpdateInfo>> result = module.checkUpdate(serverIP, port, timeout);
 
+        if(result == null) {
+
+            return;
+
+        }
+
         module.deleteFiles(result.get(0));
 
         ArrayList<UpdateInfo> downloadList = result.get(1);
