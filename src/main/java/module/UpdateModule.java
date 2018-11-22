@@ -12,7 +12,8 @@ import java.util.ArrayList;
  */
 public class UpdateModule {
 
-    private static final String ERR_DOWNLOAD_DTO_FAILED = "download DTO failed!";
+    private static final String ERR_DOWNLOAD_DTO_FAILED = "download UpdateInfoTree failed!";
+    private static final String ERR_RESPONSE_DTO_FAILED = "download FileResponseDTO failed!";
     private static final String MSG_POINT = ".";
 
     private static UpdateModule instance;
@@ -110,6 +111,13 @@ public class UpdateModule {
                 portNumber,
                 timeOut,
                 downloadRequestDTO);
+
+        if (responseDTO == null) {
+
+            System.out.println(ERR_RESPONSE_DTO_FAILED);
+
+            return;
+        }
 
         for (FileResponse r : responseDTO.getList()) {
 
