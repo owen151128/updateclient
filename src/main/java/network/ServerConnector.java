@@ -182,7 +182,7 @@ public class ServerConnector {
      *
      * @param serverIP String 형태로 서버의 아이피를 받는다.
      * @param port     int 형태의 포트 번호로 서버의 포트 번호를 받는다.
-     * @param timeout  int 형태의 타임아웃 으로 서버와 통신시 타임아웃을 지정 한다. 단위는 초(second) 이다.
+     * @param timeout  int 형태의 타임아웃 으로 서버와 통신시 타임아웃을 지정 한다. 단위는 밀리세컨드(millisecond) 이다.
      * @param dto      DownloadRequestDTO 형태로 서버에 보낼 DownloadRequestDTO 를 받는다.
      * @return FileResponseDTO 형태로 서버에서 받은 FileResponseDTO 를 반환 한다.
      */

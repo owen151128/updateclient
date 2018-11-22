@@ -46,13 +46,13 @@ public class UpdateModule {
      * 서버로 부터 업데이트 정보 를 받아 업데이트 를 체크하는 메소드
      * @param serverIP String 형태 의 서버 아이피
      * @param portNumber int 형태 의 서버 포트 번호
-     * @param timeOut int 형태 의 Time out 으로 초 단위로 나타냄
+     * @param timeOut int 형태 의 Time out 으로 밀리세컨드(millisecond) 단위로 나타냄
      * @return ArrayList 형태의 결과로 인덱스0 에는 deleteList, 인덱스1 에는 downloadList 가 들어 있다.
      */
-    public ArrayList<ArrayList<UpdateInfo>> checkUpdate(String serverIP, int portNumber, int timeOut) {
+    public ArrayList<ArrayList<UpdateInfo>> checkUpdate(String serverIP, int portNumber, int timeout) {
 
         ArrayList<ArrayList<UpdateInfo>> resultList = new ArrayList<>();
-        UpdateInfoDTO dto = serverConnector.getUpdateInfoDTO(serverIP, portNumber, timeOut);
+        UpdateInfoDTO dto = serverConnector.getUpdateInfoDTO(serverIP, portNumber, timeout);
 
         if (dto == null) {
 
@@ -98,10 +98,10 @@ public class UpdateModule {
      * downloadList 를 입력 받아 파일을 다운로드 하는 메소드 이다.
      * @param serverIP String 형태 의 서버 아이피
      * @param portNumber int 형태 의 서버 포트 번호
-     * @param timeOut int 형태 의 Time out 으로 초 단위로 나타냄
+     * @param timeout int 형태 의 Time out 으로 밀리세컨드(millisecond) 단위로 나타냄
      * @param updateInfos ArrayList 형태의 downloadList 이다.
      */
-    public void updateFiles(String serverIP, int portNumber, int timeOut, ArrayList<UpdateInfo> updateInfos) {
+    public void updateFiles(String serverIP, int portNumber, int timeout, ArrayList<UpdateInfo> updateInfos) {
 
         DownloadRequestDTO downloadRequestDTO = new DownloadRequestDTO();
 
@@ -109,7 +109,7 @@ public class UpdateModule {
 
         FileResponseDTO responseDTO = serverConnector.sendDownloadRequestDTOAndGetFileResponseDTO(serverIP,
                 portNumber,
-                timeOut,
+                timeout,
                 downloadRequestDTO);
 
         if (responseDTO == null) {
