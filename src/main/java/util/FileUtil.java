@@ -145,8 +145,9 @@ public class FileUtil {
      *
      * @param response FileResponse 형태로 해당 response에 hash 값을 사용한다.
      * @param target   String 형태의 파일 경로를 나타내는 target 으로 비교할 파일의 경로를 나타낸다.
+     * @return boolean 형태의 값으로 두 파일의 해쉬값이 같을 경우 true, 다를 경우 false 를 반환 한다.
      */
-    public static void compareFile(FileResponse response, String target) {
+    public static boolean compareFile(FileResponse response, String target) {
 
         if (!response.isDirectory()) {
 
@@ -154,13 +155,19 @@ public class FileUtil {
 
                 System.out.println(target + MSG_INTEGRITY_CLEAR);
 
+                return true;
+
             } else {
 
                 System.out.println(MSG_INTEGRITY_PROBLEM);
 
+                return false;
+
             }
 
         }
+
+        return true;
 
     }
 }

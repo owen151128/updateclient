@@ -41,7 +41,7 @@ public class Main {
                 port = Integer.parseInt(args[1]);
                 timeout = Integer.parseInt(args[2]);
 
-            }catch (NumberFormatException e) {
+            } catch (NumberFormatException e) {
 
                 System.out.println(MainConstants.ERR_WRONG_ARGUMENTS);
             }
@@ -52,21 +52,26 @@ public class Main {
 
         ArrayList<ArrayList<UpdateInfo>> result = module.checkUpdate(serverIP, port, timeout);
 
-        if(result == null) {
+        if (result == null) {
 
             return;
 
         }
 
-        module.deleteFiles(result.get(0));
+        ArrayList<UpdateInfo> deleteList = result.get(0);
+
+        module.deleteFiles(deleteList);
 
         ArrayList<UpdateInfo> downloadList = result.get(1);
 
         if (!downloadList.isEmpty()) {
 
-            module.updateFiles(serverIP, port, timeout, result.get(1));
+            do {
+
+                downloadList = module.updateFiles(serverIP, port, timeout, downloadList);
+
+            } while (!downloadList.isEmpty());
 
         }
-
     }
 }

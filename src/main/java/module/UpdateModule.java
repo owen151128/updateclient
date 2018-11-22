@@ -29,6 +29,7 @@ public class UpdateModule {
 
     /**
      * Single-Tone 패턴 적용시 사용하는 메소드
+     *
      * @return UpdateModule Instance
      */
     public static synchronized UpdateModule getInstance() {
@@ -44,9 +45,10 @@ public class UpdateModule {
 
     /**
      * 서버로 부터 업데이트 정보 를 받아 업데이트 를 체크하는 메소드
-     * @param serverIP String 형태 의 서버 아이피
+     *
+     * @param serverIP   String 형태 의 서버 아이피
      * @param portNumber int 형태 의 서버 포트 번호
-     * @param timeout int 형태 의 Time out 으로 밀리세컨드(millisecond) 단위로 나타냄
+     * @param timeout    int 형태 의 Time out 으로 밀리세컨드(millisecond) 단위로 나타냄
      * @return ArrayList 형태의 결과로 인덱스0 에는 deleteList, 인덱스1 에는 downloadList 가 들어 있다.
      */
     public ArrayList<ArrayList<UpdateInfo>> checkUpdate(String serverIP, int portNumber, int timeout) {
@@ -84,6 +86,7 @@ public class UpdateModule {
 
     /**
      * deleteList 를 입력 받아 파일을 지우는 메소드 이다.
+     *
      * @param deleteList ArrayList 형태의 deleteList
      */
     public void deleteFiles(ArrayList<UpdateInfo> deleteList) {
@@ -96,12 +99,14 @@ public class UpdateModule {
 
     /**
      * downloadList 를 입력 받아 파일을 다운로드 하는 메소드 이다.
-     * @param serverIP String 형태 의 서버 아이피
-     * @param portNumber int 형태 의 서버 포트 번호
-     * @param timeout int 형태 의 Time out 으로 밀리세컨드(millisecond) 단위로 나타냄
+     *
+     * @param serverIP    String 형태 의 서버 아이피
+     * @param portNumber  int 형태 의 서버 포트 번호
+     * @param timeout     int 형태 의 Time out 으로 밀리세컨드(millisecond) 단위로 나타냄
      * @param updateInfos ArrayList 형태의 downloadList 이다.
+     * @return ArrayList 형태의 업데이트가 재대로 되지 않은 파일의 정보가 담겨 있는 리스트
      */
-    public void updateFiles(String serverIP, int portNumber, int timeout, ArrayList<UpdateInfo> updateInfos) {
+    public ArrayList<UpdateInfo> updateFiles(String serverIP, int portNumber, int timeout, ArrayList<UpdateInfo> updateInfos) {
 
         DownloadRequestDTO downloadRequestDTO = new DownloadRequestDTO();
 
@@ -116,8 +121,10 @@ public class UpdateModule {
 
             System.out.println(ERR_RESPONSE_DTO_FAILED);
 
-            return;
+            return null;
         }
+
+        ArrayList<UpdateInfo> result = new ArrayList<>();
 
         for (FileResponse r : responseDTO.getList()) {
 
@@ -125,8 +132,20 @@ public class UpdateModule {
 
             FileUtil.writeFile(r, local_prefix_path);
 
-            FileUtil.compareFile(r, target);
+            if (!FileUtil.compareFile(r, target)) {
+
+                UpdateInfo u = new UpdateInfo();
+
+                u.setFileName(r.getFileName());
+                u.setFilePath(r.getFilePath());
+                u.setDirectory(r.isDirectory());
+                u.setFileHash(r.getFileHash());
+
+                result.add(u);
+
+            }
         }
 
+        return result;
     }
 }
