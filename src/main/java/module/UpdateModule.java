@@ -46,7 +46,7 @@ public class UpdateModule {
      * 서버로 부터 업데이트 정보 를 받아 업데이트 를 체크하는 메소드
      * @param serverIP String 형태 의 서버 아이피
      * @param portNumber int 형태 의 서버 포트 번호
-     * @param timeOut int 형태 의 Time out 으로 밀리세컨드(millisecond) 단위로 나타냄
+     * @param timeout int 형태 의 Time out 으로 밀리세컨드(millisecond) 단위로 나타냄
      * @return ArrayList 형태의 결과로 인덱스0 에는 deleteList, 인덱스1 에는 downloadList 가 들어 있다.
      */
     public ArrayList<ArrayList<UpdateInfo>> checkUpdate(String serverIP, int portNumber, int timeout) {
