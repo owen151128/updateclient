@@ -17,7 +17,7 @@ public class UpdateInfoTree {
 
     /**
      * 기본 생성자로써 root 노드를 설정한다.
-     * root 노드는 서버에서 받은 client_path 가 root 경로 가 된다.
+     * root 노드의 경로 즉, 최상위 경로는 client_path 가 된다.
      *
      * @param local_path root 노드의 경로가 될 String 형태의 경로
      */
