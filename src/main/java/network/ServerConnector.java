@@ -11,7 +11,7 @@ import java.util.ArrayList;
 /**
  * 서버와 통신을 담당하는 클래스
  * Update Info Tree 를 서버로 부터 다운로드 하는 기능과
- * DownloadRequestDTO 를 보내 서버로 부터 FileResponseDTO 를 다운로드 하는 기능이 있다.
+ * DownloadRequestDTO 를 보내 서버로 부터 FileResponse 들을 다운로드 하는 기능이 있다.
  */
 public class ServerConnector {
 
@@ -26,8 +26,8 @@ public class ServerConnector {
     private static final String MSG_DOWNLOAD_UPDATE_TREE = "download UpdateInfoDTO...";
     private static final String MSG_UPDATE_TREE_DOWNLOADED = "download UpdateInfoDTO complete";
     private static final String MSG_SEND_DOWNLOAD_REQUEST = "send DownloadRequest request";
-    private static final String MSG_DOWNLOAD_FILE_RESPONSE = "download FileResponseDTO...";
-    private static final String MSG_FILE_RESPONSE_DOWNLOADED = "download FileResponseDTO complete";
+    private static final String MSG_DOWNLOAD_FILE_RESPONSE = "download FileResponses...";
+    private static final String MSG_FILE_RESPONSE_DOWNLOADED = "download FileResponses complete";
     private static final String MSG_DISCONNECTED_SERVER = "Disconnected from update server";
 
     private static final String ERR_SERVER_NOT_FOUND = "server not found. check IP or Network state";
@@ -189,7 +189,7 @@ public class ServerConnector {
      * @param port     int 형태의 포트 번호로 서버의 포트 번호를 받는다.
      * @param timeout  int 형태의 타임아웃 으로 서버와 통신시 타임아웃을 지정 한다. 단위는 밀리세컨드(millisecond) 이다.
      * @param dto      DownloadRequestDTO 형태로 서버에 보낼 DownloadRequestDTO 를 받는다.
-     * @return FileResponseDTO 형태로 서버에서 받은 FileResponseDTO 를 반환 한다.
+     * @return ArrayList 형태로 서버에서 받은 FileResponse 들을 반환 한다.
      */
     public ArrayList<FileResponse> sendDownloadRequestDTOAndGetFileResponses(String serverIP, int port, int timeout, DownloadRequestDTO dto) {
 
